@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Usuário - Jogo dos dados</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+      <main>
+      <div class="container py-4">
+        <div th:replace="fragments/dashboard :: header"></div>
+        <div class="row">
+          <div class="col-md-2">
+            <div th:replace="fragments/dashboard :: menu-sidebar"></div>
+          </div>
+          <div class="col-md-10">
+              <a href="/users/index" class="btn btn-secondary btn-sm float-end">
+                <i class="bi bi-arrow-left"></i> Voltar
+              </a>
+              <h1 class="display-5 fw-bold">Editar Usuário</h1>
+              <div class="clearfix"></div>
+              <hr>
+              
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <form th:action="@{/users/update/1}" method="post">
+                    <input type="hidden" name="_method" value="put" />
+                    <div class="row mb-3">
+                      <label for="id" class="col-sm-3 col-form-label"><strong>ID:</strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control-plaintext" id="id" value="1" readonly>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="nome" class="col-sm-3 col-form-label"><strong>Nome:</strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="nome" name="nome" value="Maria Silva" required>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="email" class="col-sm-3 col-form-label"><strong>Email:</strong></label>
+                      <div class="col-sm-9">
+                        <input type="email" class="form-control" id="email" name="email" value="maria.silva@example.com" required>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="dataCadastro" class="col-sm-3 col-form-label"><strong>Data de Cadastro:</strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control-plaintext" id="dataCadastro" value="01/01/2025" readonly>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="status" class="col-sm-3 col-form-label"><strong>Status:</strong></label>
+                      <div class="col-sm-9">
+                        <select class="form-select" id="status" name="status">
+                          <option value="ativo" selected>Ativo</option>
+                          <option value="inativo">Inativo</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="mt-4">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i> Salvar Alterações
+                      </button>
+                      <a href="/users/show/1" class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                      </a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div th:replace="fragments/dashboard :: footer"></div>
+      </div>
+    </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
+

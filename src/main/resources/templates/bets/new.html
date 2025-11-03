@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Aposta - Jogo dos dados</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+      <main>
+      <div class="container py-4">
+        <div th:replace="fragments/dashboard :: header"></div>
+        <div class="row">
+          <div class="col-md-2">
+            <div th:replace="fragments/dashboard :: menu-sidebar"></div>
+          </div>
+          <div class="col-md-10">
+              <a href="/bets/index" class="btn btn-secondary btn-sm float-end">
+                <i class="bi bi-arrow-left"></i> Voltar
+              </a>
+              <h1 class="display-5 fw-bold">Nova Aposta</h1>
+              <div class="clearfix"></div>
+              <hr>
+              
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <form th:action="@{/bets/create}" method="post">
+                    <div class="row mb-3">
+                      <label for="id" class="col-sm-3 col-form-label"><strong>ID:</strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control-plaintext" id="id" value="1" readonly>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="valor" class="col-sm-3 col-form-label"><strong>Valor da Aposta:</strong></label>
+                      <div class="col-sm-9">
+                        <input type="number" step="0.01" min="0.01" class="form-control" id="valor" name="valor" value="100.00" required>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="numeroEscolhido" class="col-sm-3 col-form-label"><strong>Número Escolhido:</strong></label>
+                      <div class="col-sm-9">
+                        <select class="form-select" id="numeroEscolhido" name="numeroEscolhido" required>
+                          <option value="">Selecione um número</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4" selected>4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="resultado" class="col-sm-3 col-form-label"><strong>Resultado do Dado:</strong></label>
+                      <div class="col-sm-9">
+                        <input type="number" min="1" max="6" class="form-control" id="resultado" name="resultado" placeholder="Deixe em branco se ainda não rolou">
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="dataAposta" class="col-sm-3 col-form-label"><strong>Data da Aposta:</strong></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control-plaintext" id="dataAposta" value="01/01/2025 14:30" readonly>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                      <label for="status" class="col-sm-3 col-form-label"><strong>Status:</strong></label>
+                      <div class="col-sm-9">
+                        <select class="form-select" id="status" name="status">
+                          <option value="pendente" selected>Pendente</option>
+                          <option value="ganhou">Ganhou</option>
+                          <option value="perdeu">Perdeu</option>
+                          <option value="finalizada">Finalizada</option>
+                        </select>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="mt-4">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i> Salvar nova aposta
+                      </button>
+                      <a href="/bets/index" class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                      </a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div th:replace="fragments/dashboard :: footer"></div>
+      </div>
+    </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

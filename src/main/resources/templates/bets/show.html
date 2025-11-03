@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes da Aposta - Jogo dos dados</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+      <main>
+      <div class="container py-4">
+        <div th:replace="fragments/dashboard :: header"></div>
+        <div class="row">
+          <div class="col-md-2">
+            <div th:replace="fragments/dashboard :: menu-sidebar"></div>
+          </div>
+          <div class="col-md-10">
+              <a href="/bets/index" class="btn btn-secondary btn-sm float-end">
+                <i class="bi bi-arrow-left"></i> Voltar
+              </a>
+              <h1 class="display-5 fw-bold">Detalhes da Aposta</h1>
+              <div class="clearfix"></div>
+              <hr>
+              
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <div class="row mb-3">
+                    <div class="col-sm-3"><strong>ID:</strong></div>
+                    <div class="col-sm-9">1</div>
+                  </div>
+                  <hr>
+                  <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Valor da Aposta:</strong></div>
+                    <div class="col-sm-9">R$ 100,00</div>
+                  </div>
+                  <hr>
+                  <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Número Escolhido:</strong></div>
+                    <div class="col-sm-9">4</div>
+                  </div>
+                  <hr>
+                  <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Resultado do Dado:</strong></div>
+                    <div class="col-sm-9">4</div>
+                  </div>
+                  <hr>
+                  <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Data da Aposta:</strong></div>
+                    <div class="col-sm-9">01/01/2025 14:30</div>
+                  </div>
+                  <hr>
+                  <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Status:</strong></div>
+                    <div class="col-sm-9">
+                      <span class="badge bg-success">Ganhou</span>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="mt-4">
+                    <a href="/bets/edit/1" class="btn btn-primary">
+                      <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <form th:action="@{/bets/delete/1}" method="post" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir esta aposta? Esta ação não pode ser desfeita.');">
+                      <input type="hidden" name="_method" value="delete" />
+                      <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Excluir
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div th:replace="fragments/dashboard :: footer"></div>
+      </div>
+    </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
