@@ -27,36 +27,31 @@
                 <div class="card-body">
                   <div class="row mb-3">
                     <div class="col-sm-3"><strong>ID:</strong></div>
-                    <div class="col-sm-9">1</div>
+                    <div class="col-sm-9" th:text="${user.id}"></div>
                   </div>
                   <hr>
                   <div class="row mb-3">
                     <div class="col-sm-3"><strong>Nome:</strong></div>
-                    <div class="col-sm-9">Maria Silva</div>
+                    <div class="col-sm-9" th:text="${user.name}"></div>
                   </div>
                   <hr>
                   <div class="row mb-3">
                     <div class="col-sm-3"><strong>Email:</strong></div>
-                    <div class="col-sm-9">maria.silva@example.com</div>
+                    <div class="col-sm-9" th:text="${user.email}"></div>
                   </div>
                   <hr>
                   <div class="row mb-3">
-                    <div class="col-sm-3"><strong>Data de Cadastro:</strong></div>
-                    <div class="col-sm-9">01/01/2025</div>
-                  </div>
-                  <hr>
-                  <div class="row mb-3">
-                    <div class="col-sm-3"><strong>Status:</strong></div>
+                    <div class="col-sm-3"><strong>Perfil:</strong></div>
                     <div class="col-sm-9">
-                      <span class="badge bg-success">Ativo</span>
+                      <span class="badge bg-success" th:text="${user.role}"></span>
                     </div>
                   </div>
                   <hr>
                   <div class="mt-4">
-                    <a href="/users/edit/1" class="btn btn-primary">
+                    <a th:href="@{|/users/edit/${user.id}|}" class="btn btn-primary">
                       <i class="bi bi-pencil"></i> Editar
                     </a>
-                    <form th:action="@{/users/delete/1}" method="post" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.');">
+                    <form th:action="@{|/users/delete/${user.id}|}" method="post" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.');">
                       <input type="hidden" name="_method" value="delete" />
                       <button type="submit" class="btn btn-danger">
                         <i class="bi bi-trash"></i> Excluir

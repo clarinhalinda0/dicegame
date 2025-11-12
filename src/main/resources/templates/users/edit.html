@@ -25,42 +25,35 @@
               
               <div class="card shadow-sm">
                 <div class="card-body">
-                  <form th:action="@{/users/update/1}" method="post">
+                  <form th:action="@{|/users/update/${user.id}|}" th:object="${user}" method="post">
                     <input type="hidden" name="_method" value="put" />
                     <div class="row mb-3">
-                      <label for="id" class="col-sm-3 col-form-label"><strong>ID:</strong></label>
+                      <label for="name" class="col-sm-3 col-form-label"><strong>Nome:</strong></label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" id="id" value="1" readonly>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row mb-3">
-                      <label for="nome" class="col-sm-3 col-form-label"><strong>Nome:</strong></label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="nome" name="nome" value="Maria Silva" required>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" required>
                       </div>
                     </div>
                     <hr>
                     <div class="row mb-3">
                       <label for="email" class="col-sm-3 col-form-label"><strong>Email:</strong></label>
                       <div class="col-sm-9">
-                        <input type="email" class="form-control" id="email" name="email" value="maria.silva@example.com" required>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" required>
                       </div>
                     </div>
                     <hr>
                     <div class="row mb-3">
-                      <label for="dataCadastro" class="col-sm-3 col-form-label"><strong>Data de Cadastro:</strong></label>
+                      <label for="password" class="col-sm-3 col-form-label"><strong>Senha:</strong></label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" id="dataCadastro" value="01/01/2025" readonly>
+                        <input type="password" class="form-control" id="password" th:field="*{password}" required>
                       </div>
                     </div>
                     <hr>
                     <div class="row mb-3">
-                      <label for="status" class="col-sm-3 col-form-label"><strong>Status:</strong></label>
+                      <label for="role" class="col-sm-3 col-form-label"><strong>Perfil:</strong></label>
                       <div class="col-sm-9">
-                        <select class="form-select" id="status" name="status">
-                          <option value="ativo" selected>Ativo</option>
-                          <option value="inativo">Inativo</option>
+                        <select class="form-select" id="role" name="role">
+                          <option value="USER" selected>Usuário</option>
+                          <option value="ADMIN">Administrador</option>
                         </select>
                       </div>
                     </div>
@@ -69,7 +62,7 @@
                       <button type="submit" class="btn btn-primary">
                         <i class="bi bi-check-circle"></i> Salvar Alterações
                       </button>
-                      <a href="/users/show/1" class="btn btn-secondary">
+                      <a th:href="@{|/users/show/${user.id}|}" class="btn btn-secondary">
                         <i class="bi bi-x-circle"></i> Cancelar
                       </a>
                     </div>
