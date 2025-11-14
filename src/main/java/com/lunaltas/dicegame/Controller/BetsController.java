@@ -3,6 +3,7 @@ package com.lunaltas.dicegame.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.lunaltas.dicegame.domain.Bet;
 import com.lunaltas.dicegame.service.BetService;
 import com.lunaltas.dicegame.service.UserService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/bets")
@@ -40,7 +43,11 @@ public class BetsController {
   }
 
   @PostMapping("/create")
-  public String create( Bet bet, RedirectAttributes redirectAttributes) {
+  public String create(@Valid Bet bet, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) { 
+    if (result.hasErrors()) {
+      model.addAttribute("users", userService.findAll());
+      return "/bets/new";
+    }
     betService.save(bet);
     redirectAttributes.addFlashAttribute("success", "Bet salvo com sucesso");
     return "redirect:/bets/show/" + bet.getId();
@@ -60,7 +67,11 @@ public class BetsController {
   }
 
   @PutMapping("/update/{id}")
-  public String update(@PathVariable Long id, Bet bet, RedirectAttributes redirectAttributes) {
+  public String update(@PathVariable Long id, @Valid Bet bet, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) {
+    if (result.hasErrors()) {
+      model.addAttribute("users", userService.findAll());
+      return "/bets/edit";
+    }
     betService.update(bet);
     redirectAttributes.addFlashAttribute("success", "Bet atualizado com sucesso");
     return "redirect:/bets/show/" + bet.getId();

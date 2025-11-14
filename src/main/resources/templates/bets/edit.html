@@ -27,11 +27,12 @@
               <div class="card shadow-sm">
                 <div class="card-body">
                   <form th:action="@{|/bets/update/${bet.id}|}" th:object="${bet}" method="post">
+                    <div th:replace="~{fragments/validation :: validation}"></div>
                     <input type="hidden" name="_method" value="put" />
                     <div class="row mb-3">
                       <label for="name" class="col-sm-3 col-form-label"><strong>Nome:</strong></label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                        <input type="text" class="form-control" id="name" th:field="*{name}">
                       </div>
                     </div>
                     <hr>

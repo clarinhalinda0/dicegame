@@ -3,6 +3,7 @@ package com.lunaltas.dicegame.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.lunaltas.dicegame.domain.User;
 import com.lunaltas.dicegame.service.UserService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
@@ -36,7 +39,10 @@ public class UsersController {
   }
 
   @PostMapping("/create") // salvar novo usuário
-  public String create(User user, RedirectAttributes redirectAttributes) {
+  public String create(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
+    if (result.hasErrors()) {
+			return "/users/new";
+		}
     userService.save(user);
     redirectAttributes.addFlashAttribute("success", "Usuário salvo com sucesso");
     return "redirect:/users/show/" + user.getId();
@@ -55,7 +61,10 @@ public class UsersController {
   }
 
   @PutMapping("/update/{id}") // atualizar usuário - put+++
-  public String update(@PathVariable Long id, User user, RedirectAttributes redirectAttributes) {
+  public String update(@PathVariable Long id, @Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
+    if (result.hasErrors()) {
+			return "/users/edit";
+		}
     userService.update(user);
     redirectAttributes.addFlashAttribute("success", "Usuário atualizado com sucesso");
     return "redirect:/users/show/" + user.getId();

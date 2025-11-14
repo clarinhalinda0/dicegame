@@ -6,21 +6,31 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "users")
 public class User extends AbstractEntity<Long> {
 
+
+  @NotBlank(message = "O nome é obrigatório.")
   @Column(name = "name", nullable = false, length = 60)
 	private String name;
 
+  @NotBlank(message = "O email é obrigatório.")
+  @Email(message = "O email deve ser válido.")
   @Column(name = "email", nullable = false, length = 60)
 	private String email;
 
+  @NotBlank(message = "A senha é obrigatória.")
+  @Size(min = 8, max = 20, message = "A senha deve ter entre 8 e 20 caracteres.")
   @Column(name = "password", nullable = false, length = 60)
 	private String password;
 
+  @NotBlank(message = "O papel é obrigatório.")
   @Column(name = "role", nullable = false)
 	private String role = "USER";
 
