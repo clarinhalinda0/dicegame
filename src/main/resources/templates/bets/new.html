@@ -26,36 +26,7 @@
               
               <div class="card shadow-sm">
                 <div class="card-body">
-                  <form th:action="@{/bets/create}" th:object="${bet}" method="post">
-                    <div th:replace="~{fragments/validation :: validation}"></div>
-                    <div class="row mb-3">
-                      <label for="name" class="col-sm-3 col-form-label"><strong>Nome:</strong></label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="name" th:field="*{name}">
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row mb-3">
-                      <label for="user" class="col-sm-3 col-form-label"><strong>Dealer:</strong></label>
-                      <div class="col-sm-9">
-                        <label for="user_id">Dealer</label>
-	                      <select id="user_id" class="form-control" th:field="*{user.id}">
-                          <option value="">Selecione um usuário</option>
-                          <option th:each="u : ${users}" 
-                                  th:value="${u.id}" th:text="${u.name}">Selecione</option>
-                        </select>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="mt-4">
-                      <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-check-circle"></i> Salvar nova bet
-                      </button>
-                      <a href="/bets/index" class="btn btn-secondary">
-                        <i class="bi bi-x-circle"></i> Cancelar
-                      </a>
-                    </div>
-                  </form>
+                  <div th:replace="~{fragments/forms :: bet(${bet}, ${users})}"></div>
                 </div>
               </div>
           </div>
