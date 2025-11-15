@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 
 
   <div th:fragment="header">
     <header class="pb-3 mb-4 border-bottom">
-      <form th:action="@{/logout}" method="post"  class="form-inline mt-2 mt-md-0 float-end">
-        <div class="dropdown">
-          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user"></i> <span class=""
-            >User</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><button type="submit" class="dropdown-item">Sair</button></li>
-          </ul>
-        </div>
-      </form>
-      <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none">
+      <div sec:authorize="isAuthenticated()" class="form-inline mt-2 mt-md-0 float-end">
+        <form th:action="@{/logout}" method="post">
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user"></i> <span sec:authentication="name">User</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><button type="submit" class="dropdown-item">Sair</button></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <div sec:authorize="!isAuthenticated()">
+        <a href="/login" class="btn btn-primary float-end">Login</a>
+      </div>
+      <a href="/" class="text-body-emphasis text-decoration-none">
         <img src="/rolling-dice.gif" alt="Logo" class="img-fluid" width="30" height="30"> - <span class="fs-4"> Rolando os dados</span>
       </a>
     </header>
@@ -24,6 +28,8 @@
 
 
   <div th:fragment="menu-sidebar">
+    <span class="badge rounded-pill text-bg-success mb-2 ms-2" style="font-size: 12px;" sec:authorize="hasRole('ADMIN')">Administrador</span>
+    <span class="badge rounded-pill text-bg-primary mb-2 ms-2" style="font-size: 12px;" sec:authorize="hasRole('USER')">Usuário</span>
     <div class="sidebar border border-right p-0 bg-body-tertiary">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
@@ -38,36 +44,13 @@
                 Bets
               </a>
             </li>
-            <!--<li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-file-earmark"></i>
-                Orders
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-cart"></i>
-                Products
-              </a>
-            </li>-->
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
               <a class="nav-link d-flex align-items-center gap-2" th:href="@{/users/index}">
                 <i class="bi bi-people"></i>
                 Usuários
               </a>
             </li>
-            <!--<li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-graph-up"></i>
-                Reports
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-puzzle"></i>
-                Integrations
-              </a>
-            </li>-->
+
           </ul>
         </div>
       </div>
