@@ -83,4 +83,9 @@ public class BetsController {
     redirectAttributes.addFlashAttribute("success", "Bet deletado com sucesso");
     return "redirect:/bets/index";
   }
+  @PutMapping("/{betId}/finish/{ownerId}")
+public String finishBet(@PathVariable Long ownerId, @PathVariable Long betId) {
+    return betService.finishBet(ownerId, betId);
+}
+
 }
